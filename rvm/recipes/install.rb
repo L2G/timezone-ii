@@ -12,8 +12,6 @@ if ruby_version.size > 0
 
   include_recipe "rvm"
 
-  log "Installing ruby #{ruby_version}"
-
   bash "installing #{ruby_version}" do
     user "root"
     code "rvm install #{ruby_version}"
@@ -28,7 +26,8 @@ if ruby_version.size > 0
   end
 
   gem_package "chef" do
-    gem_binary "/usr/local/rvm/bin/gem"
+    gem_binary "/usr/local/rvm/rubies/default/bin/gem"
+    only_if "test -e /usr/local/rvm/rubies/default"
     # re-install the chef gem into rvm to enable subsequent chef-client run
   end
 
