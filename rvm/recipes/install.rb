@@ -23,11 +23,12 @@ if ruby_version.size > 0
     code "rvm --default #{ruby_version}"
     not_if "rvm list | grep '=> #{ruby_version}'"
     only_if { node[:rvm][:ruby][:default] }
+    notifies :restart, "service[chef-client]"
   end
 
   gem_package "chef" do
-    gem_binary "/usr/local/rvm/rubies/default/bin/gem"
-    only_if "test -e /usr/local/rvm/rubies/default"
+    gem_binary "/usr/local/bin/rvm-gem.sh"
+    only_if "test -e /usr/local/bin/rvm-gem.sh"
     # re-install the chef gem into rvm to enable subsequent chef-client run
   end
 

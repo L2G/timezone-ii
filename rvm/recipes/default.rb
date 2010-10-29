@@ -38,3 +38,9 @@ cookbook_file "/etc/profile.d/rvm.sh" do
   group "root"
   mode 0755
 end
+
+cookbook_file "/usr/local/bin/rvm-gem.sh" do
+  owner "root"
+  group "root"
+  mode 0755
+end
