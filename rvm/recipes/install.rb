@@ -23,7 +23,7 @@ if ruby_version.size > 0
     code "rvm --default #{ruby_version}"
     not_if "rvm list | grep '=> #{ruby_version}'"
     only_if { node[:rvm][:ruby][:default] }
-    notifies :restart, "service[chef-client]"
+    #notifies :restart, "service[chef-client]"
   end
 
   gem_package "chef" do
