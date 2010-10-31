@@ -1,0 +1,17 @@
+My Ruby 1.9.2, Passenger/Nginx stack.
+
+My roles:
+
+  tasty-ruby-stack:
+    role[basic-box]
+    recipe[rvm::ruby_192]
+    recipe[passenger::install]
+
+  basic-box:
+    recipe[build-essential::default]
+    recipe[chef::bootstrap_client]
+    recipe[chef::client]
+
+I also have roles depending on tasty-ruby-stack, which 
+deploy my apps from github repos and configure nginx
+vhosts, workers, etc. YMMV.
