@@ -52,7 +52,7 @@ directory "#{nginx_path}/conf/sites.d" do
   notifies :reload, 'service[passenger]'
 end
 
-template "#{nginx_path}/conf/nginx.conf" do
+template "#{nginx_path}/conf/nginx.conf.unpatched" do
   source "nginx.conf.erb"
   owner "root"
   group "root"
@@ -77,9 +77,9 @@ bash "config_patch" do
   # The big problem is that we can't compute the gem install path
   # because we don't know what ruby version we're being installed
   # on if RVM is present.
-#  only_if "grep '##PASSENGER_ROOT##' #{nginx_path}/conf/nginx.conf"
   user "root"
   code "#{nginx_path}/sbin/config_patch.sh #{nginx_path}/conf/nginx.conf"
+  #only_if "egrep '##(PASSENGER_ROOT||RUBY_PATH)##' #{nginx_path}/conf/nginx.conf"
   notifies :reload, 'service[passenger]'
 end
 
