@@ -1,10 +1,10 @@
 gem_package 'linode' do
-  not_if "test -e /usr/local/bin/rvm-gem.sh"
+  #not_if "test -e /usr/local/bin/rvm-gem.sh"
 end
 
 gem_package "linode" do
-  gem_binary "/usr/local/bin/rvm-gem.sh"
-  only_if "test -e /usr/local/bin/rvm-gem.sh"
+  gem_binary "/usr/local/rvm/wrappers/default/gem"
+  only_if "test -e /usr/local/rvm/wrappers/default/gem"
 end
 
 

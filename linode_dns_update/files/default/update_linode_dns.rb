@@ -26,7 +26,7 @@ end
 def get_rr(hostname, type, domain)
   node = ((hostname.split('.') - domain.domain.split('.'))) * '.'
   @linode.domain.resource.list( 'DOMAINID' => domain.domainid ).each do |rr|
-    return rr if rr.name == 'node' && rr.type == type
+    return rr if rr.name == node && rr.type == type
   end
   nil
 end
