@@ -10,7 +10,7 @@ Defaults        !lecture,tty_tickets,!fqdn
 root    			ALL=(ALL) ALL
 
 <% @sudoers_users.each do |user| -%>
-<%= user %> ALL=(ALL) ALL
+<%= user %> ALL=(ALL) NOPASSWD: ALL
 <% end -%>
 
 # Members of the sysadmin group may gain root privileges
@@ -18,5 +18,5 @@ root    			ALL=(ALL) ALL
 
 <% @sudoers_groups.each do |group| -%>
 # Members of the group '<%= group %>' may gain root privileges
-%<%= group %> ALL=(ALL) ALL
+%<%= group %> ALL=(ALL) NOPASSWD: ALL
 <% end -%>

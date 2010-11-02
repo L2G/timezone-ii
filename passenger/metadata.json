@@ -8,6 +8,9 @@
   "platforms": {
   },
   "dependencies": {
+    "logrotate": [
+
+    ]
   },
   "recommendations": {
   },

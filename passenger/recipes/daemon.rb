@@ -112,3 +112,9 @@ service "passenger" do
   pattern "nginx: master"
 end
 
+include_recipe "logrotate"
+
+logrotate_app "passenger" do
+  paths "#{node[:passenger][:production][:log_path]}/*.log #{node[:passenger][:production][:log_path]}/*/*.log"
+  rotate 12
+end
