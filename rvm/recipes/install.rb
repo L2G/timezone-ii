@@ -21,7 +21,7 @@ bash "make #{ruby_version} the default ruby" do
   code "/usr/local/bin/rvm --default #{ruby_version}"
   not_if "rvm list | grep '=> #{ruby_version}'"
   only_if { node[:rvm][:ruby][:default] }
-  notifies :restart, "service[chef-client]"
+#  notifies :restart, "service[chef-client]"
 end
 
 gem_package "chef" do
@@ -32,4 +32,4 @@ end
 
 # Needed so that chef doesn't freak out if the chef-client service
 # isn't present.
-service "chef-client"
+#service "chef-client"
