@@ -65,6 +65,21 @@ default[:mongodb][:oplogsize]     = 0
 default[:mongodb][:opidmem]       = 0
 
 
+### REPLICA SETS
+default[:mongodb][:replica_set][:enabled]  = false
+default[:mongodb][:replica_set][:name] = 'myReplicaSet'
+default[:mongodb][:replica_set][:votes] = 1
+default[:mongodb][:replica_set][:primary] = false
+default[:mongodb][:replica_set][:priority] = 1.0
+default[:mongodb][:replica_set][:arbiter_only] = false
+default[:mongodb][:replica_set][:hidden] = false
+default[:mongodb][:replica_set][:slave_delay] = 0 # seconds
+default[:mongodb][:replica_set][:build_indexes] = true
+# these are for the whole set, but will only be used by
+# the node who has mongodb/replica_set/primary set.
+default[:mongodb][:replica_set][:heartbeat_sleep] = 2 # seconds
+default[:mongodb][:replica_set][:heartbeat_timeout] = 2 # seconds
+default[:mongodb][:replica_set][:heartbeat_conn_retries] = 3 # times
 
 ### BACKUP
 default[:mongodb][:backup][:backupdir]    = "/var/backups/mongodb"

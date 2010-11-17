@@ -85,3 +85,42 @@ service "mongodb" do
   subscribes :restart, resources(:template => node[:mongodb][:config])
   subscribes :restart, resources(:template => "/etc/init.d/mongodb")
 end
+
+template rs_config_path = File.join(File.dirname(node[:mongodb][:config]), 'replica_set.conf') do
+  source 'replica_set.conf.erb'
+  owner 'root'
+  group 'root'
+  mode 0644
+  variables( :members => search(:node, "mongodb_replica_set_name:#{node[:mongodb][:replica_set][:name]}"))
+  notifies :run, 'bash[replica_set_initiate]'
+  notifies :run, 'bash[replica_set_reconfigure]'
+end
+
+mongo_client = "#{node[:mongodb][:dir]}/bin/mongo"
+
+bash "replica_set_initiate" do
+  action :nothing
+  # only if replica sets are enabled, and we're the primary
+  only_if { node[:mongodb][:replica_set][:enabled] && node[:mongodb][:replica_set][:primary] }
+  # not if the rs is already configured.
+  not_if "test $(echo -n 'x' ; #{node[:mongodb][:dir]}/bin/mongo --eval \"rs.status()['ok']\" --quiet) == 'x1'"
+  user 'root'
+  code <<-EOH
+    # Run the replica set configuration.
+    (cat #{rs_config_path} ; echo "rs.initiate(cfg);") | #{node[:mongodb][:dir]}/bin/mongo --quiet
+  EOH
+end
+
+bash "replica_set_reconfigure" do
+  action :nothing
+  # only if replica sets are enabled, and we're the primary
+  only_if { node[:mongodb][:replica_set][:enabled] && node[:mongodb][:replica_set][:primary] }
+  # only if the rs is already configured.
+  only_if "test $(echo -n 'x' ; #{node[:mongodb][:dir]}/bin/mongo --eval \"rs.status()['ok']\" --quiet) == 'x1'"
+  user 'root'
+  code <<-EOH
+    # Run the replica set configuration.
+    (cat #{rs_config_path} ; echo "rs.reconfig(cfg);") | #{node[:mongodb][:dir]}/bin/mongo --quiet
+  EOH
+end
+
