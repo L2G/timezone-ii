@@ -1,2 +1,2 @@
 # Allow SSH into our public interface.
--A FWR -p tcp --dport 22 -d <%= node[:ipaddress] %> -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A FWR -p tcp --dport 22 -d <%= node[:ipaddress] %> -m state --state NEW,RELATED,ESTABLISHED -j ACCEPT
