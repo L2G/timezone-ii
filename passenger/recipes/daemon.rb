@@ -78,7 +78,8 @@ bash "config_patch" do
   # because we don't know what ruby version we're being installed
   # on if RVM is present.
   user "root"
-  code "#{nginx_path}/sbin/config_patch.sh #{nginx_path}/conf/nginx.conf"
+  code "#{nginx_path}/sbin/config_patch.sh #{nginx_path}/conf/nginx.conf.unpatched #{nginx_path}/conf/nginx.conf"
+  action :nothing
   #only_if "egrep '##(PASSENGER_ROOT||RUBY_PATH)##' #{nginx_path}/conf/nginx.conf"
   notifies :reload, 'service[passenger]'
 end

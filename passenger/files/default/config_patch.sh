@@ -13,6 +13,9 @@ fi
 PASSENGER_ROOT=$(echo $PASSENGER_ROOT | sed -e 's/\([\/ ]\)/\\\1/g')
 RUBY_PATH=$(echo $RUBY_PATH | sed -e 's/\([\/ ]\)/\\\1/g')
 
+# Copy the config:
+cp -v $1 $2
+
 # Patch the config:
-sed -e "s/##PASSENGER_ROOT##/${PASSENGER_ROOT}/g" -i $1
-sed -e "s/##RUBY_PATH##/${RUBY_PATH}/g" -i $1
+sed -e "s/##PASSENGER_ROOT##/${PASSENGER_ROOT}/g" -i $2
+sed -e "s/##RUBY_PATH##/${RUBY_PATH}/g" -i $2
