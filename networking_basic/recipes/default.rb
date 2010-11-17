@@ -24,7 +24,8 @@ packages = [
   'netcat-openbsd',
   'tcpdump',
   'elinks',
-  'lynx'
+  'lynx',
+  'bind9-host'
 ]
 
 case node[:platform]
