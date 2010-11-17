@@ -1,0 +1,45 @@
+cfg = {
+  _id: '<%= node[:mongodb][:replica_set][:name] %>',
+  members: [
+    <% @members.size.times do |i| %>
+      <% member = @members[i] %>
+    {
+      _id: <%= i.to_s %>,
+      <% if member[:rackspace] %>
+      host: '<%= member[:rackspace][:private_ip] %><%= member[:mongodb][:port] ? ":#{member[:mongodb][:port]}" : "" %>',
+      <% else %>
+      host: '<%= member[:ipaddress] %><%= member[:mongodb][:port] ? ":#{member[:mongodb][:port]}" : "" %>',
+      <% end %>
+      <% if member[:mongodb][:replica_set][:priority] %>
+      priority: <%= member[:mongodb][:replica_set][:priority].to_s %>,
+      <% end %>
+      <% if member[:mongodb][:replica_set][:arbiter_only] %>
+      arbiterOnly: <%= member[:mongodb][:replica_set][:arbiter_only].to_s %>,
+      <% end %>
+      <% if member[:mongodb][:replica_set][:votes] %>
+      votes: <%= member[:mongodb][:replica_set][:votes].to_s %>,
+      <% end %>
+      <% if member[:mongodb][:replica_set][:hidden] %>
+      hidden: <%= member[:mongodb][:replica_set][:hidden].to_s %>,
+      <% end %>
+      <% if member[:mongodb][:replica_set][:slave_delay] %>
+      slaveDelay: <%= member[:mongodb][:replica_set][:slave_delay].to_s %>,
+      <% end %>
+      <% if member[:mongodb][:replica_set][:build_indexes] %>
+      buildIndexes: <%= member[:mongodb][:replica_set][:build_indexes].to_s %>
+      <% end %>
+    },
+    <% end %>
+  ],
+  settings: {
+    <% if node[:mongodb][:replica_set][:hearbeat_sleep] %>
+    heartbeatSleep: <%= node[:mongodb][:replica_set][:hearbeat_sleep].to_s %>,
+    <% end %>
+    <% if node[:mongodb][:replica_set][:hearbeat_timeout] %>
+    heartbeatTimeout: <%= node[:mongodb][:replica_set][:hearbeat_timeout].to_s %>,
+    <% end %>
+    <% if node[:mongodb][:replica_set][:hearbeat_conn_retries] %>
+    heartbeatConnRetries: <%= node[:mongodb][:replica_set][:hearbeat_conn_retries].to_s %>
+    <% end %>
+  }
+};
