@@ -52,21 +52,6 @@ directory "#{nginx_path}/conf/sites.d" do
   notifies :reload, 'service[passenger]'
 end
 
-template "#{nginx_path}/conf/nginx.conf.unpatched" do
-  source "nginx.conf.erb"
-  owner "root"
-  group "root"
-  mode 0644
-  variables(
-    :log_path => log_path,
-    :passenger_root => "##PASSENGER_ROOT##",
-    :ruby_path => "##RUBY_PATH##",
-    :passenger => node[:passenger][:production],
-    :pidfile => "#{nginx_path}/nginx.pid"
-  )
-  notifies :run, 'bash[config_patch]'
-end
-
 cookbook_file "#{nginx_path}/sbin/config_patch.sh" do
   owner "root"
   group "root"
@@ -81,7 +66,22 @@ bash "config_patch" do
   code "#{nginx_path}/sbin/config_patch.sh #{nginx_path}/conf/nginx.conf.unpatched #{nginx_path}/conf/nginx.conf"
   action :nothing
   #only_if "egrep '##(PASSENGER_ROOT||RUBY_PATH)##' #{nginx_path}/conf/nginx.conf"
-  notifies :reload, 'service[passenger]'
+  notifies :restart, 'service[passenger]'
+end
+
+template "#{nginx_path}/conf/nginx.conf.unpatched" do
+  source "nginx.conf.erb"
+  owner "root"
+  group "root"
+  mode 0644
+  variables(
+    :log_path => log_path,
+    :passenger_root => "##PASSENGER_ROOT##",
+    :ruby_path => "##RUBY_PATH##",
+    :passenger => node[:passenger][:production],
+    :pidfile => "#{nginx_path}/logs/nginx.pid"
+  )
+  notifies :run, 'bash[config_patch]'
 end
 
 template "/etc/init.d/passenger" do
@@ -90,7 +90,7 @@ template "/etc/init.d/passenger" do
   group "root"
   mode 0755
   variables(
-    :pidfile => "#{nginx_path}/nginx.pid",
+    :pidfile => "#{nginx_path}/logs/nginx.pid",
     :nginx_path => nginx_path
   )
 end

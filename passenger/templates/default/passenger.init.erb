@@ -41,6 +41,7 @@ do_start()
 {
         $DAEMON -t 1> /dev/null 2> /dev/null || return 2
         $DAEMON
+        #ps x | grep "ngin[x]: master" | awk '{print $1}' > $PIDFILE
 }
 
 #
