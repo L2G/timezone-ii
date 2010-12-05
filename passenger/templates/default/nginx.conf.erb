@@ -24,6 +24,7 @@ http {
   tcp_nopush <%= @passenger[:tcp_nopush] ? 'on' : 'off' %>;
   keepalive_timeout <%= @passenger[:keepalive_timeout] %>;
   gzip <%= @passenger[:gzip] ? 'on' : 'off' %>;
+  server_names_hash_bucket_size 64;
 
   include sites.d/*.conf;
 

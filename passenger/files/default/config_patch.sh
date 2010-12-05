@@ -3,7 +3,7 @@
 # Find our paths.
 if [ -e /usr/local/rvm/rubies/default ]; then
   PASSENGER_ROOT=$(/usr/local/bin/rvm default exec passenger-config --root)
-  RUBY_PATH=$(/usr/local/bin/rvm default exec which ruby)
+  RUBY_PATH='/usr/local/rvm/bin/ruby'
 else
   PASSENGER_ROOT=$(passenger-config --root)
   RUBY_PATH=$(which ruby)
