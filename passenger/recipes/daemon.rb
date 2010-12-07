@@ -104,6 +104,8 @@ end
 
 service "passenger" do
   service_name "passenger"
+  enabled true
+  running true
   reload_command "#{nginx_path}/sbin/nginx -s reload"
   start_command "#{nginx_path}/sbin/nginx"
   stop_command "#{nginx_path}/sbin/nginx -s stop"

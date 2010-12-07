@@ -23,7 +23,16 @@ http {
   sendfile <%= @passenger[:sendfile] ? 'on' : 'off' %>;
   tcp_nopush <%= @passenger[:tcp_nopush] ? 'on' : 'off' %>;
   keepalive_timeout <%= @passenger[:keepalive_timeout] %>;
-  gzip <%= @passenger[:gzip] ? 'on' : 'off' %>;
+  <%- if @passenger[:gzip] %>
+    gzip on;
+    gzip_min_length  1000;
+    gzip_proxied     expired no-cache no-store private auth;
+    gzip_types       text/plain application/xml;
+    gzip_disable     "MSIE [1-6]\.";
+  <% else %>
+    gzip off;
+  <% end -%>
+  
   server_names_hash_bucket_size 64;
 
   include sites.d/*.conf;
