@@ -7,6 +7,7 @@ version "0.0.2"
 # The rvm recipe only installs rvm
 # and doesn't do anything else.
 recipe "rvm", "Install system-wide RVM"
+
 # the rvm:install recipe installs
 # a ruby implementation based on
 # node attributes.
@@ -22,3 +23,7 @@ recipe "rvm::ree", "Helper recipe to install ruby enterprise edition"
 
 depends "apt"
 depends "build-essential"
+
+%w{debian ubuntu}.each do |os|
+  supports os
+end

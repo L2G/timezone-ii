@@ -18,3 +18,7 @@ default[:rvm][:version] = :stable
 # note: this will effectively inhibit
 # installation of :head.
 default[:rvm][:track_updates] = false
+
+# set this for compatibilty with other people's recipes
+set[:languages][:ruby][:ruby_bin] = `rvm default exec which ruby`.chomp
+
