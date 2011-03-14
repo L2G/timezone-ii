@@ -15,7 +15,7 @@ if platform?("centos","redhat")
     package "httpd-devel"
   end
 else
-  %w{ apache2-prefork-dev libapr1-dev }.each do |pkg|
+  %w{ apache2-prefork-dev libapr1-dev libcurl4-openssl-dev }.each do |pkg|
     package pkg do
       action :upgrade
     end
