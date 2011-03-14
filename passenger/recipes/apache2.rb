@@ -5,8 +5,6 @@
 # Derives from the opsware passenger_apache2
 
 include_recipe "passenger::install"
-include_recipe "apache2"
-
 
 if platform?("centos","redhat")
   if dist_only?
@@ -63,6 +61,7 @@ template "#{node[:apache][:dir]}/mods-available/passenger.conf" do
   mode 0644
 end
 
+include_recipe "apache2"
 apache_module "passenger"
 
 
