@@ -28,8 +28,8 @@ rvm_exec_prefix = system("test -e /usr/local/rvm") ? "/usr/local/bin/rvm default
 
 bash "install passenger/apache2" do
   user "root"
-  code '#{rvm_exec_prefix} passenger-install-apache2-module --auto'
-  not_if "test -e #{node[:passenger][:module_path]}"
+  code "#{rvm_exec_prefix} passenger-install-apache2-module --auto"
+  creates "#{node[:passenger][:module_path]}"
 end
 
 
