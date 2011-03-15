@@ -44,3 +44,6 @@ cookbook_file "/usr/local/bin/rvm-gem.sh" do
   group "root"
   mode 0755
 end
+
+# set this for compatibilty with other people's recipes
+node.default[:languages][:ruby][:ruby_bin] = `rvm default exec which ruby`.chomp

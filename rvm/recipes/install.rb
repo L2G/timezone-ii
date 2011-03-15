@@ -24,6 +24,9 @@ bash "make #{ruby_version} the default ruby" do
 #  notifies :restart, "service[chef-client]"
 end
 
+# set this for compatibilty with other people's recipes
+node.default[:languages][:ruby][:ruby_bin] = `rvm default exec which ruby`.chomp
+
 gem_package "chef" do
   gem_binary "/usr/local/bin/rvm-gem.sh"
   only_if "test -e /usr/local/bin/rvm-gem.sh"
