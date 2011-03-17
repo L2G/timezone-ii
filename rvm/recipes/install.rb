@@ -25,7 +25,7 @@ bash "make #{ruby_version} the default ruby" do
 end
 
 # set this for compatibilty with other people's recipes
-node.default[:languages][:ruby][:ruby_bin] = `rvm default exec which ruby`.chomp
+node.default[:languages][:ruby][:ruby_bin] = find_ruby
 
 gem_package "chef" do
   gem_binary "/usr/local/bin/rvm-gem.sh"
