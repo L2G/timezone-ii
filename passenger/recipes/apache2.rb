@@ -4,7 +4,7 @@
 
 # Derives from the opsware passenger_apache2
 
-include_recipe "passenger::install"
+include_recipe "apache2"
 
 if platform?("centos","redhat")
   if dist_only?
@@ -22,6 +22,7 @@ else
   end
 end
 
+include_recipe "passenger::install"
 
 rvm_exec_prefix = system("test -e /usr/local/rvm") ? "/usr/local/bin/rvm default exec" : ""
 
