@@ -51,6 +51,7 @@ else
     owner "root"
     group "root"
     mode 0644
+    only_if do ::File.exists?(node[:passenger][:root_path]) end
   end
 end
 
@@ -60,10 +61,13 @@ template "#{node[:apache][:dir]}/mods-available/passenger.conf" do
   owner "root"
   group "root"
   mode 0644
+  only_if do ::File.exists?(node[:passenger][:root_path]) end
 end
 
 include_recipe "apache2"
-apache_module "passenger"
+apache_module "passenger" do
+  only_if do ::File.exists?(node[:passenger][:root_path]) end
+end
 
 
 #log_path = node[:passenger][:production][:log_path]
