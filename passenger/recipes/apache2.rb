@@ -65,8 +65,9 @@ template "#{node[:apache][:dir]}/mods-available/passenger.conf" do
 end
 
 include_recipe "apache2"
-apache_module "passenger" do
-  only_if do ::File.exists?(node[:passenger][:root_path]) end
+
+if ::File.exists?(node[:passenger][:root_path])
+  apache_module "passenger"
 end
 
 
