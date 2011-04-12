@@ -24,6 +24,14 @@ bash "make #{ruby_version} the default ruby" do
 #  notifies :restart, "service[chef-client]"
 end
 
+# clean up rvm stuff
+# This is mostly to save inode space
+bash "rvm cleanup sources" do
+  user "root"
+  code "/usr/local/bin/rvm cleanup all"
+end
+
+
 # set this for compatibilty with other people's recipes
 node.default[:languages][:ruby][:ruby_bin] = find_ruby
 
