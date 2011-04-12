@@ -47,3 +47,11 @@ end
 
 # set this for compatibilty with other people's recipes
 node.default[:languages][:ruby][:ruby_bin] = find_ruby
+
+# clean up rvm stuff
+# This is mostly to save inode space
+bash "rvm-cleanup" do
+  user "root"
+  code "/usr/local/bin/rvm cleanup all"
+  action :nothing
+end

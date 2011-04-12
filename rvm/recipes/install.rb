@@ -22,14 +22,9 @@ bash "make #{ruby_version} the default ruby" do
   not_if "rvm list | grep '=> #{ruby_version}'"
   only_if { node[:rvm][:ruby][:default] }
 #  notifies :restart, "service[chef-client]"
+  notifies :run, resources(:execute => "rvm-cleanup")
 end
 
-# clean up rvm stuff
-# This is mostly to save inode space
-bash "rvm cleanup sources" do
-  user "root"
-  code "/usr/local/bin/rvm cleanup all"
-end
 
 
 # set this for compatibilty with other people's recipes
