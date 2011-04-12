@@ -13,6 +13,14 @@ include_recipe "build-essential"
 %w(libreadline5-dev zlib1g-dev libssl-dev libxml2-dev libxslt1-dev).each do |pkg|
   package pkg
 end
+
+# clean up rvm stuff
+# This is mostly to save inode space
+execute "rvm-cleanup" do
+  user "root"
+  command "/usr/local/bin/rvm cleanup all"
+  action :nothing
+end
  
 bash "installing system-wide RVM stable" do
   user "root"
@@ -48,10 +56,3 @@ end
 # set this for compatibilty with other people's recipes
 node.default[:languages][:ruby][:ruby_bin] = find_ruby
 
-# clean up rvm stuff
-# This is mostly to save inode space
-bash "rvm-cleanup" do
-  user "root"
-  code "/usr/local/bin/rvm cleanup all"
-  action :nothing
-end
