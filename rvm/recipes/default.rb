@@ -18,7 +18,7 @@ end
 # This is mostly to save inode space
 execute "rvm-cleanup" do
   user "root"
-  command "/usr/local/bin/rvm cleanup all"
+  command "/usr/local/bin/rvm cleanup sources"
   action :nothing
 end
  
