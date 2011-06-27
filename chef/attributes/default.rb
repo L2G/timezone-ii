@@ -40,7 +40,6 @@ default[:chef][:client_version]  = node.chef_packages.chef[:version]
 default[:chef][:client_interval] = "1800"
 default[:chef][:client_splay]    = "20"
 default[:chef][:log_dir]         = "/var/log/chef"
-default[:chef][:log_level]       = ":info"
 default[:chef][:server_port]     = "4000"
 default[:chef][:webui_port]      = "4040"
 default[:chef][:webui_enabled]   = false
