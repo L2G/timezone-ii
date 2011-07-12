@@ -26,6 +26,5 @@ gem_package "bundler/rvm" do
   only_if "test -e /usr/local/bin/rvm"
 end
 
-rvm_exec_prefix = system("test -e /usr/local/rvm") ? "/usr/local/bin/rvm default exec" : ""
-node.default[:passenger][:root_path] = `#{rvm_exec_prefix} passenger-config --root`.chomp 
-node.default[:passenger][:module_path] = `#{rvm_exec_prefix} passenger-config --root`.chomp + "/ext/apache2/mod_passenger.so"
+node.default[:passenger][:root_path] = run_passenger_config '--root'
+node.default[:passenger][:module_path] = run_passenger_config('--root') + "/ext/apache2/mod_passenger.so"
