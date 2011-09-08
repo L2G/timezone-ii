@@ -16,4 +16,12 @@ bash "reload_hostname" do
   user "root"
   code "hostname -F /etc/hostname"
   notifies :restart, "service[chef-client]"
+  action :nothing
+end
+
+template "/etc/hosts" do
+  source "hosts.erb"
+  owner "root"
+  group "root"
+  mode 0644
 end

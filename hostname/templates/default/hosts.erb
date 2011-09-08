@@ -1,7 +1,7 @@
 # This file is automatically created by Chef's hostname recipe.
 # don't bother editing it because it will be overwritten.
 127.0.0.1        localhost
-<%= node[:ipaddress] %>         <%= node[:hostname] %> <%= node[:hostname].split('.').first %>
+<%= node[:ipaddress] %>         <%= node[:fqdn] %> <%= node[:hostname].split('.').first %>
 
 ::1              ip6-localhost localhost
 fe00::0          ip6-localnet
