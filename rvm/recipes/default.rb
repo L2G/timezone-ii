@@ -10,7 +10,7 @@ package "curl"
 package "git-core"
 include_recipe "build-essential"
  
-%w(libreadline5-dev zlib1g-dev libssl-dev libxml2-dev libxslt1-dev).each do |pkg|
+%w(libreadline-dev zlib1g-dev libssl-dev libxml2-dev libxslt1-dev).each do |pkg|
   package pkg
 end
 
