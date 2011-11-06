@@ -18,7 +18,7 @@ end
 # This is mostly to save inode space
 execute "rvm-cleanup" do
   user "root"
-  command "/usr/local/bin/rvm cleanup sources"
+  command "/usr/local/rvm/bin/rvm cleanup sources"
   action :nothing
 end
  
@@ -47,7 +47,7 @@ end
 #  mode 0755
 #end
 
-cookbook_file "/usr/local/bin/rvm-gem.sh" do
+cookbook_file "/usr/local/rvm/bin/rvm-gem.sh" do
   owner "root"
   group "root"
   mode 0755

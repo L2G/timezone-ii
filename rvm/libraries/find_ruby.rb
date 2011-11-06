@@ -6,7 +6,7 @@ class Chef
     def find_ruby
       
 
-      if File.exists?("/usr/local/bin/rvm")
+      if File.exists?("/usr/local/rvm/bin/rvm")
         return `rvm default exec which ruby`.chomp
       else
         return "/usr/bin/ruby"

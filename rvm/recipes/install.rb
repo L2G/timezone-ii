@@ -12,13 +12,13 @@ include_recipe "rvm::default"
 
 bash "installing #{ruby_version}" do
   user "root"
-  code "/usr/local/bin/rvm install #{ruby_version}"
+  code "/usr/local/rvm/bin/rvm install #{ruby_version}"
   not_if "rvm list | grep #{ruby_version}"
 end
 
 bash "make #{ruby_version} the default ruby" do
   user "root"
-  code "/usr/local/bin/rvm --default #{ruby_version}"
+  code "/usr/local/rvm/bin/rvm --default #{ruby_version}"
   not_if "rvm list | grep '=> #{ruby_version}'"
   only_if { node[:rvm][:ruby][:default] }
 #  notifies :restart, "service[chef-client]"
@@ -31,8 +31,8 @@ end
 node.default[:languages][:ruby][:ruby_bin] = find_ruby
 
 gem_package "chef" do
-  gem_binary "/usr/local/bin/rvm-gem.sh"
-  only_if "test -e /usr/local/bin/rvm-gem.sh"
+  gem_binary "/usr/local/rvm/bin/rvm-gem.sh"
+  only_if "test -e /usr/local/rvm/bin/rvm-gem.sh"
   # re-install the chef gem into rvm to enable subsequent chef-client run
 end
 

@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /usr/local/bin/rvm gem $*
+exec /usr/local/rvm/bin/rvm gem $*
