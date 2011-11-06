@@ -24,7 +24,7 @@ end
 
 include_recipe "passenger::install"
 
-rvm_exec_prefix = system("test -e /usr/local/rvm") ? "/usr/local/bin/rvm default exec" : ""
+rvm_exec_prefix = system("test -e /usr/local/rvm") ? "/usr/local/rvm/bin/rvm default exec" : ""
 
 
 bash "install passenger/apache2" do

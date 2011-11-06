@@ -25,7 +25,7 @@ end
 bash "install passenger/nginx from rvm" do
   user "root"
   code <<-EOH
-  /usr/local/bin/rvm exec passenger-install-nginx-module --auto --auto-download --prefix="#{nginx_path}" --extra-configure-flags="#{node[:passenger][:production][:configure_flags]}"
+  /usr/local/rvm/bin/rvm exec passenger-install-nginx-module --auto --auto-download --prefix="#{nginx_path}" --extra-configure-flags="#{node[:passenger][:production][:configure_flags]}"
   EOH
   not_if "test -e #{nginx_path}"
   only_if "test -e /usr/local/rvm"
