@@ -4,10 +4,17 @@
 
 include_recipe "passenger::install"
 
+cc='gcc'
+
 package "curl"
 if ['ubuntu', 'debian'].member? node[:platform]
   ['libcurl4-openssl-dev','libpcre3-dev'].each do |pkg|
     package pkg
+  end
+  if node[:platform_version] == '11.10'
+    package 'gcc-4.4'
+    package 'libstdc++6-4.4-dev'
+    cc='gcc-4.4'
   end
 end
 
@@ -16,7 +23,7 @@ nginx_path = node[:passenger][:production][:path]
 bash "install passenger/nginx" do
   user "root"
   code <<-EOH
-  passenger-install-nginx-module --auto --auto-download --prefix="#{nginx_path}" --extra-configure-flags="#{node[:passenger][:production][:configure_flags]}"
+  CC=#{cc} passenger-install-nginx-module --auto --auto-download --prefix="#{nginx_path}" --extra-configure-flags="#{node[:passenger][:production][:configure_flags]}"
   EOH
   not_if "test -e #{nginx_path}"
   not_if "test -e /usr/local/rvm"
@@ -25,7 +32,7 @@ end
 bash "install passenger/nginx from rvm" do
   user "root"
   code <<-EOH
-  /usr/local/rvm/bin/rvm exec passenger-install-nginx-module --auto --auto-download --prefix="#{nginx_path}" --extra-configure-flags="#{node[:passenger][:production][:configure_flags]}"
+  CC=#{cc} /usr/local/rvm/bin/rvm exec passenger-install-nginx-module --auto --auto-download --prefix="#{nginx_path}" --extra-configure-flags="#{node[:passenger][:production][:configure_flags]}"
   EOH
   not_if "test -e #{nginx_path}"
   only_if "test -e /usr/local/rvm"
@@ -106,9 +113,9 @@ service "passenger" do
   service_name "passenger"
   enabled true
   running true
-  reload_command "#{nginx_path}/sbin/nginx -s reload"
+  reload_command "test -e #{nginx_path}/logs/nginx.pid && #{nginx_path}/sbin/nginx -s reload"
   start_command "#{nginx_path}/sbin/nginx"
-  stop_command "#{nginx_path}/sbin/nginx -s stop"
+  stop_command "test -e #{nginx_path}/logs/nginx.pid && #{nginx_path}/sbin/nginx -s stop"
   status_command "curl http://localhost/nginx_status"
   supports [ :start, :stop, :reload, :status, :enable ]
   action [ :enable, :start ]
