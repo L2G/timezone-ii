@@ -13,13 +13,13 @@ include_recipe "rvm::default"
 bash "installing #{ruby_version}" do
   user "root"
   code "/usr/local/rvm/bin/rvm install #{ruby_version}"
-  not_if "rvm list | grep #{ruby_version}"
+  not_if "/usr/local/rvm/bin/rvm list | grep #{ruby_version}"
 end
 
 bash "make #{ruby_version} the default ruby" do
   user "root"
   code "/usr/local/rvm/bin/rvm --default #{ruby_version}"
-  not_if "rvm list | grep '=> #{ruby_version}'"
+  not_if "/usr/local/rvm/bin/rvm list | grep '=> #{ruby_version}'"
   only_if { node[:rvm][:ruby][:default] }
 #  notifies :restart, "service[chef-client]"
   notifies :run, resources(:execute => "rvm-cleanup")
@@ -37,5 +37,5 @@ gem_package "chef" do
 end
 
 # Needed so that chef doesn't freak out if the chef-client service
-# isn't present.
+# isn't present
 #service "chef-client"

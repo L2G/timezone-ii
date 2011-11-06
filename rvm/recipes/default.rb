@@ -25,19 +25,19 @@ end
 bash "installing system-wide RVM stable" do
   user "root"
   code "bash < <( curl -L https://rvm.beginrescueend.com/install/rvm )"
-  not_if "which rvm"
+  not_if "test -e /usr/local/rvm/bin/rvm"
 end
 
 bash "upgrading to RVM head" do
   user "root"
-  code "rvm update --head ; rvm reload"
+  code "/usr/local/rvm/bin/rvm update --head ; /usr/local/rvm/bin/rvm reload"
   only_if { node[:rvm][:version] == :head }
   only_if { node[:rvm][:track_updates] }
 end
 
 bash "upgrading RVM stable" do
   user "root"
-  code "rvm update ; rvm reload"
+  code "/usr/local/rvm/bin/rvm update ; /usr/local/rvm/bin/rvm reload"
   only_if { node[:rvm][:track_updates] }
 end
 
