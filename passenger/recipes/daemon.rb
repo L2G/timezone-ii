@@ -45,6 +45,14 @@ directory log_path do
   action :create
 end
 
+directory "#{nginx_path}/logs" do
+  mode 0755
+  action :create
+  recursive true
+  owner "nobody"
+  group "root"
+end
+
 directory "#{nginx_path}/conf/conf.d" do
   mode 0755
   action :create
@@ -113,9 +121,9 @@ service "passenger" do
   service_name "passenger"
   enabled true
   running true
-  reload_command "test -e #{nginx_path}/logs/nginx.pid && #{nginx_path}/sbin/nginx -s reload"
+  reload_command "if [ -e #{nginx_path}/logs/nginx.pid ]; then #{nginx_path}/sbin/nginx -s reload; fi"
   start_command "#{nginx_path}/sbin/nginx"
-  stop_command "test -e #{nginx_path}/logs/nginx.pid && #{nginx_path}/sbin/nginx -s stop"
+  stop_command "if [ -e #{nginx_path}/logs/nginx.pid ]; then #{nginx_path}/sbin/nginx -s stop; fi"
   status_command "curl http://localhost/nginx_status"
   supports [ :start, :stop, :reload, :status, :enable ]
   action [ :enable, :start ]
