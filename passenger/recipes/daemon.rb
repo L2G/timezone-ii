@@ -25,7 +25,10 @@ bash "install passenger/nginx" do
   code <<-EOH
   CC=#{cc} passenger-install-nginx-module --auto --auto-download --prefix="#{nginx_path}" --extra-configure-flags="#{node[:passenger][:production][:configure_flags]}"
   EOH
-  not_if { (Dir.exist?( nginx_path ) || Dir.exist?( '/usr/local/rvm' )) }
+  not_if do
+    (((File.exists? nginx_path) && (File.directory? nginx_path)) || 
+     ((File.exists? '/usr/local/rvm') && (File.directory? '/usr/local/rvm')))
+  end
 end
 
 bash "install passenger/nginx from rvm" do
