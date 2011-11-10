@@ -7,7 +7,7 @@ class Chef
       
 
       if File.exists?("/usr/local/rvm/bin/rvm")
-        return `/ust/local/rvm/bin/rvm default exec which ruby`.chomp
+        return `/usr/local/rvm/bin/rvm default exec which ruby`.chomp
       else
         return "/usr/bin/ruby"
       end
