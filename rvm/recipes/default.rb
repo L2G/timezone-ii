@@ -24,7 +24,7 @@ end
  
 bash "installing system-wide RVM stable" do
   user "root"
-  code "bash < <( curl -L https://rvm.beginrescueend.com/install/rvm )"
+  code "bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)"
   not_if "test -e /usr/local/rvm/bin/rvm"
 end
 
