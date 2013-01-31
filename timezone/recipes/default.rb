@@ -8,6 +8,8 @@
 # Apache 2.0 License.
 #
 
+Chef::Log.debug "Time zone setting: #{node.tz}"
+
 # Make sure the tzdata database is installed. (Arthur David Olson, the computer
 # timekeeping field is forever in your debt.)
 package "tzdata"
