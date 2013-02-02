@@ -49,12 +49,37 @@ elsif node.os == "linux"
     not_if { %w( gentoo rhel ).include? node.platform_family }
   end
 
-  file node.timezone.localtime_path do
-    content File.open(File.join(node.timezone.tzdata_dir, node.tz), 'rb').read
-    owner 'root'
-    group 'root'
-    mode 0644
+  timezone_data_file = File.join(node.timezone.tzdata_dir, node.tz)
+  ruby_block "confirm timezone" do
+    block {
+      unless File.exist?(timezone_data_file)
+        raise "Can't find #{timezone_data_file}!"
+      end
+    }
   end
+
+  if node.timezone.use_symlink
+    link node.timezone_localtime_path do
+      to timezone_data_file
+      owner 'root'
+      group 'root'
+      mode 0644
+    end
+
+  else
+    file node.timezone.localtime_path do
+      content File.open(timezone_data_file, 'rb').read
+      owner 'root'
+      group 'root'
+      mode 0644
+      not_if {
+        File.symlink?(timezone_data_file) and
+          Chef::Log.error "You must remove symbolic link at " +
+                          timezone_data_file +
+                          "or set attribute ['timezone']['use_symlink']=true"
+      }
+    end
+  end  # if/else node.timezone.use_symlink
 
 else
   log "unknown platform" do
@@ -62,6 +87,6 @@ else
             "'#{node.platform_family}'!"
     level :error
   end
-end
+end  # if/elsif/else platform-check
 
 # vim:ts=2:sw=2:
