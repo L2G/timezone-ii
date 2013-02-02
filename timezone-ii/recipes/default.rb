@@ -14,8 +14,7 @@ Chef::Log.debug "Time zone setting: #{node.tz}"
 # timekeeping field is forever in your debt.)
 package "tzdata"
 
-case node.platform_family
-when 'debian'
+if node.platform_family == 'debian'
   # On Debian, Ubuntu, et al., put the timezone string in plain text in
   # /etc/timezone and then re-run the tzdata configuration to pick it up.
   template "/etc/timezone" do
@@ -32,9 +31,18 @@ when 'debian'
     action :nothing
   end
 
-when 'rhel'
-  # On RedHat Enterprise, Amazon Linux, CentOS, et al., the compiled timezone
-  # data has to be copied out of the /usr/share/zoneinfo tree directly.
+elsif node.os == "linux"
+  # Generic method for Linux that should work for any Linux distro. Since it's a
+  # last resort for platforms that have no better way to change the timezone,
+  # this will log a warning.  (No warning on RHEL-based platforms since this
+  # seems to be the best current practice there.)
+  log "fallback Linux" do
+    message "Linux platform '#{node.platform}' is unknown to this recipe; " +
+            "using fallback Linux method"
+    level :warn
+    not_if { node.platform_family == 'rhel' }
+  end
+
   file '/etc/localtime' do
     content File.open(File.join('/usr/share/zoneinfo', node.tz), 'rb').read
     owner 'root'
@@ -43,8 +51,11 @@ when 'rhel'
   end
 
 else
-  Chef::Log.error "Don't know how to configure timezone for " +
-    "'#{node.platform_family}' family!"
+  log "unknown platform" do
+    message "Don't know how to configure timezone for " +
+            "'#{node.platform_family}'!"
+    level :error
+  end
 end
 
 # vim:ts=2:sw=2:
