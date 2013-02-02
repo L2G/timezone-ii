@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: timezone
+# Cookbook Name:: timezone-ii
 # Recipe:: default
 #
 # Copyright 2010, James Harton <james@sociable.co.nz>
