@@ -12,7 +12,10 @@ Chef::Log.debug "Time zone setting: #{node.tz}"
 
 # Make sure the tzdata database is installed. (Arthur David Olson, the computer
 # timekeeping field is forever in your debt.)
-package "tzdata"
+package value_for_platform_family(
+  'gentoo'  => 'timezone-data',
+  'default' => 'tzdata'
+)
 
 if node.platform_family == 'debian'
   # On Debian, Ubuntu, et al., put the timezone string in plain text in
@@ -40,7 +43,7 @@ elsif node.os == "linux"
     message "Linux platform '#{node.platform}' is unknown to this recipe; " +
             "using fallback Linux method"
     level :warn
-    not_if { node.platform_family == 'rhel' }
+    not_if { %w( gentoo rhel ).include? node.platform_family }
   end
 
   file '/etc/localtime' do
