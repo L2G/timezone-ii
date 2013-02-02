@@ -49,8 +49,8 @@ elsif node.os == "linux"
     not_if { %w( gentoo rhel ).include? node.platform_family }
   end
 
-  file '/etc/localtime' do
-    content File.open(File.join('/usr/share/zoneinfo', node.tz), 'rb').read
+  file node.timezone.localtime_path do
+    content File.open(File.join(node.timezone.tzdata_dir, node.tz), 'rb').read
     owner 'root'
     group 'root'
     mode 0644
