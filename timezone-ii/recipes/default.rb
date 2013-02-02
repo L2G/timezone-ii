@@ -50,6 +50,8 @@ elsif node.os == "linux"
   end
 
   timezone_data_file = File.join(node.timezone.tzdata_dir, node.tz)
+  localtime_path = node.timezone.localtime_path
+
   ruby_block "confirm timezone" do
     block {
       unless File.exist?(timezone_data_file)
@@ -59,7 +61,7 @@ elsif node.os == "linux"
   end
 
   if node.timezone.use_symlink
-    link node.timezone_localtime_path do
+    link localtime_path do
       to timezone_data_file
       owner 'root'
       group 'root'
@@ -67,16 +69,15 @@ elsif node.os == "linux"
     end
 
   else
-    file node.timezone.localtime_path do
+    file localtime_path do
       content File.open(timezone_data_file, 'rb').read
       owner 'root'
       group 'root'
       mode 0644
       not_if {
-        File.symlink?(timezone_data_file) and
-          Chef::Log.error "You must remove symbolic link at " +
-                          timezone_data_file +
-                          "or set attribute ['timezone']['use_symlink']=true"
+        File.symlink?(localtime_path) and
+          Chef::Log.error "You must remove symbolic link at #{localtime_path}" +
+                          " or set attribute ['timezone']['use_symlink']=true"
       }
     end
   end  # if/else node.timezone.use_symlink
