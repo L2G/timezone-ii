@@ -38,10 +38,9 @@ if node.platform_family == 'debian'
   end
 
 elsif node.os == "linux"
-  # Generic method for Linux that should work for any Linux distro. Since it's a
-  # last resort for platforms that have no better way to change the timezone,
-  # this will log a warning.  (No warning on RHEL-based platforms since this
-  # seems to be the best current practice there.)
+  # Load the generic Linux recipe if there's no better known way to change the
+  # timezone.  Log a warning (unless this is known to be the best way on a
+  # particular platform).
   log "fallback Linux" do
     message "Linux platform '#{node.platform}' is unknown to this recipe; " +
             "using fallback Linux method"
@@ -49,38 +48,7 @@ elsif node.os == "linux"
     not_if { %w( gentoo rhel ).include? node.platform_family }
   end
 
-  timezone_data_file = File.join(node.timezone.tzdata_dir, node.tz)
-  localtime_path = node.timezone.localtime_path
-
-  ruby_block "confirm timezone" do
-    block {
-      unless File.exist?(timezone_data_file)
-        raise "Can't find #{timezone_data_file}!"
-      end
-    }
-  end
-
-  if node.timezone.use_symlink
-    link localtime_path do
-      to timezone_data_file
-      owner 'root'
-      group 'root'
-      mode 0644
-    end
-
-  else
-    file localtime_path do
-      content File.open(timezone_data_file, 'rb').read
-      owner 'root'
-      group 'root'
-      mode 0644
-      not_if {
-        File.symlink?(localtime_path) and
-          Chef::Log.error "You must remove symbolic link at #{localtime_path}" +
-                          " or set attribute ['timezone']['use_symlink']=true"
-      }
-    end
-  end  # if/else node.timezone.use_symlink
+  include_recipe 'timezone-ii::linux-generic'
 
 else
   log "unknown platform" do
