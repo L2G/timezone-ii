@@ -1,3 +1,7 @@
-cookbook "" do
+cookbook 'timezone-ii'
 
+platform 'fedora' do
+    version '18.0' do
+        box 'f18'
+    end
 end
