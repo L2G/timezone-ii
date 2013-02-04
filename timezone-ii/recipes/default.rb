@@ -21,21 +21,7 @@ package value_for_platform_family(
 )
 
 if node.platform_family == 'debian'
-  # On Debian, Ubuntu, et al., put the timezone string in plain text in
-  # /etc/timezone and then re-run the tzdata configuration to pick it up.
-  template "/etc/timezone" do
-    source "timezone.conf.erb"
-    owner 'root'
-    group 'root'
-    mode 0644
-    notifies :run, 'bash[dpkg-reconfigure tzdata]'
-  end
-
-  bash 'dpkg-reconfigure tzdata' do
-    user 'root'
-    code "/usr/sbin/dpkg-reconfigure -f noninteractive tzdata"
-    action :nothing
-  end
+  include_recipe "timezone-ii::#{node.platform_family}"
 
 elsif node.os == "linux"
   # Load the generic Linux recipe if there's no better known way to change the
