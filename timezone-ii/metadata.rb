@@ -9,7 +9,7 @@ replaces         "timezone", "= 0.0.1"
 # These are platform versions where this cookbook has been tested at some point
 # in time
 supports "amazon", ">= 2012.09"
-supports "fedora", ">= 18"
+supports "fedora", ">= 18.0"
 supports "gentoo", ">= 2.1"
 
 # These have not been tested but should also work
