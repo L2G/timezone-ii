@@ -23,19 +23,25 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['sparrow']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['sparrow']['pid_path']</tt></td>
+    <td>String</td>
+    <td>Directory to use for Sparrow server to save PIDs. At present, this is
+    used only to create the directory.</td>
+    <td><tt>/var/run/sparrow/pids</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['sparrow']['spool_path']</tt></td>
+    <td>String</td>
+    <td>Directory to use for Sparrow's message queue. At present, this is used
+    only to create the directory.</td>
+    <td><tt>/var/spool/sparrow/base</tt></td>
   </tr>
 </table>
 
 Usage
 -----
 #### sparrow::default
-TODO: Write usage instructions for each cookbook.
 
-e.g.
 Just include `sparrow` in your node's `run_list`:
 
 ```json
@@ -47,17 +53,19 @@ Just include `sparrow` in your node's `run_list`:
 }
 ```
 
+Directories specified in the attributes will be created. Since there is no
+helper script included with this cookbook, you must start the server yourself
+and use the appropriate command-line options if you set paths different from the
+defaults.
+
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
-3. Write you change
+1. Fork the repository on GitHub
+2. Create a named feature branch (like `add\_component\_x`)
+3. Write your change
 4. Write tests for your change (if applicable)
 5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
+6. Submit a pull request using GitHub
 
 License and Authors
 -------------------
