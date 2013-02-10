@@ -1,7 +1,27 @@
 cookbook 'timezone-ii'
 
-platform 'fedora' do
-    version '18.0' do
-        box 'f18'
+platform 'centos' do
+    version '5.8' do
+        box 'opscode-centos-5.8'
+        box_url 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-5.8_chef-10.18.2.box'
+    end
+    version '6.3' do
+        box 'opscode-centos-6.3'
+        box_url 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.3_chef-10.18.2.box'
     end
 end
+
+platform 'ubuntu' do
+    version '10.04' do
+        box 'opscode-ubuntu-10.04'
+        box_url 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-10.04_chef-10.18.2.box'
+    end
+    version '12.04' do
+        #box 'L2G-ubuntu-12.04'
+        #box_url '~/work/GitHub/opscode/bento/L2G-ubuntu-12.04.box'
+        box 'opscode-ubuntu-10.04'
+        box_url 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-10.04_chef-10.18.2.box'
+    end
+end
+
+# vim:ft=ruby:
