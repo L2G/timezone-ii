@@ -1,10 +1,11 @@
+name             "timezone-ii"
 maintainer       "Lawrence Leonard Gilbert"
 maintainer_email "larry@L2G.to"
 license          "Apache 2.0"
 description      "Configure the system timezone on Linux systems"
 version          "0.1.5"
 
-replaces         "timezone", "= 0.0.1"
+replaces         "timezone"
 
 # These are platform versions where this cookbook has been tested at some point
 # in time
