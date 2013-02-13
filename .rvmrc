@@ -46,3 +46,5 @@ if [[ -s Gemfile ]] && builtin command -v bundle >/dev/null
 then
   bundle install | GREP_OPTIONS= \grep -vE '^Using|Your bundle is complete'
 fi
+
+echo -n ".rvmrc: switched Ruby to "; rvm current
