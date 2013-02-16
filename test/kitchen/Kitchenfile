@@ -19,8 +19,8 @@ platform 'ubuntu' do
     version '12.04' do
         #box 'L2G-ubuntu-12.04'
         #box_url '~/work/GitHub/opscode/bento/L2G-ubuntu-12.04.box'
-        box 'opscode-ubuntu-10.04'
-        box_url 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-10.04_chef-10.18.2.box'
+        box 'opscode-ubuntu-12.04'
+        box_url 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_chef-10.18.2.box'
     end
 end
 
