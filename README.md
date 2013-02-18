@@ -1,12 +1,13 @@
 Timezone II
 ===========
 The Timezone II cookbook contains recipes for installing the latest tzdata
-(a.k.a IANA or Olson) timezone database and setting the timezone on your
-system.  It is a fork of the timezone cookbook by James Harton.
+(a.k.a. IANA or Olson) timezone database and setting the timezone on your
+system.  It is a fork of the [timezone cookbook by James
+Harton.](http://community.opscode.com/cookbooks/timezone)
 
 Requirements
 ------------
-Some form of Linux system is assumed.  It is hoped that future version will
+Some form of Linux system is assumed.  It is hoped that future versions will
 accommodate other operating systems.
 
 Attributes
