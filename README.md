@@ -1,5 +1,6 @@
 Timezone II
 ===========
+
 The Timezone II cookbook contains recipes for installing the latest tzdata
 (a.k.a. IANA or Olson) timezone database and setting the timezone on your
 system.  It is a fork of the [timezone cookbook by James
@@ -7,8 +8,21 @@ Harton.](http://community.opscode.com/cookbooks/timezone)
 
 Requirements
 ------------
-Some form of Linux system is assumed.  It is hoped that future versions will
-accommodate other operating systems.
+
+This cookbook is known to work with:
+
+* Amazon Linux
+* CentOS
+* Debian
+* Fedora
+* Gentoo
+* Ubuntu
+
+It _should_ work with any OS that uses the IANA/Olson timezone database and
+stores local timezone data in /etc/localtime (the only OS I know of that does
+_not_ do this is MS Windows).  However, some OSs not mentioned above have their
+own system utility for setting the timezone, and this may overwrite the changes
+made by this cookbook.
 
 Attributes
 ----------
@@ -65,12 +79,14 @@ recipe in your node's run list:
 }
 ```
 
-The timezone-ii::default recipe will automatically select one of the other
-recipes according to your node's platform:
+The `timezone-ii::default` recipe will first install or upgrade the IANA/Olson
+timezone database package for your OS (`timezone-data` on Gentoo, `tzdata` on
+all others). Then it will call one of the following recipes according to your
+node's platform:
 
-* timezone-ii::debian
-* timezone-ii::fedora
-* timezone-ii::linux-generic
+* `timezone-ii::debian`
+* `timezone-ii::fedora`
+* `timezone-ii::linux-generic`
 
 Contributing
 ------------
