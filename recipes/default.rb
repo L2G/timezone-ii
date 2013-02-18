@@ -25,10 +25,10 @@ else
     # timezone.  Log a warning (unless this is known to be the best way on a
     # particular platform).
     message = "Linux platform '#{node.platform}' is unknown to this recipe; " +
-              "using fallback Linux method"
+              "using generic Linux method"
     log message do
       level :warn
-      not_if { %w( gentoo rhel ).include? node.platform_family }
+      not_if { %w( centos gentoo rhel ).include? node.platform_family }
     end
 
     include_recipe 'timezone-ii::linux-generic'
