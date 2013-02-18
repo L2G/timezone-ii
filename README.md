@@ -74,21 +74,19 @@ recipes according to your node's platform:
 
 Contributing
 ------------
-1. Fork the `L2G/chef-cookbooks` repository on GitHub
-2. Check out the `timezone-ii` branch
-3. Create a named feature branch (like `add\_component\_x`) based on the
-   `timezone-ii` branch
-4. Write your change
-5. If at all possible, write test-kitchen tests for your change and ensure they
+1. Fork the [repository on GitHub](https://github.com/L2G/timezone-ii)
+2. Create a named feature branch (like `add_component_x`)
+3. Write your change
+4. If at all possible, write test-kitchen tests for your change and ensure they
    all pass
-6. Submit a pull request using GitHub
+5. Submit a pull request using GitHub
 
 License and Authors
 -------------------
 
-Copyright (c) 2010 James Harton <james@sociable.co.nz>
+Copyright © 2010 James Harton <james@sociable.co.nz>
 
-Copyright (c) 2013 Lawrence Leonard Gilbert <larry@L2G.to>
+Copyright © 2013 Lawrence Leonard Gilbert <larry@L2G.to>
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 this file except in compliance with the License.  You may obtain a copy of the
