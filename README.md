@@ -69,15 +69,13 @@ Usage
 Set the "tz" attribute to your desired timezone and include the "timezone-ii"
 recipe in your node's run list:
 
-```json
-{
-  "name": "my_node",
-  "tz": "Africa/Timbuktu",
-  "run_list": [
-    "recipe[timezone-ii]"
-  ]
-}
-```
+    {
+      "name": "my_node",
+      "tz": "Africa/Timbuktu",
+      "run_list": [
+        "recipe[timezone-ii]"
+      ]
+    }
 
 The `timezone-ii::default` recipe will first install or upgrade the IANA/Olson
 timezone database package for your OS (`timezone-data` on Gentoo, `tzdata` on
