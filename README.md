@@ -77,14 +77,42 @@ recipe in your node's run list:
       ]
     }
 
-The `timezone-ii::default` recipe will first install or upgrade the IANA/Olson
-timezone database package for your OS (`timezone-data` on Gentoo, `tzdata` on
-all others). Then it will call one of the following recipes according to your
-node's platform:
+### timezone-ii::default
 
-* `timezone-ii::debian`
-* `timezone-ii::fedora`
-* `timezone-ii::linux-generic`
+The default recipe will first install or upgrade the IANA/Olson
+timezone database package for your OS (`timezone-data` on Gentoo, `tzdata` on
+all others). Then it will call one of the recipes below according to your
+node's platform.
+
+### timezone-ii::debian
+
+This changes the timezone on Debian and Debian-derived systems by:
+
+1. writing the value of `tz` to `/etc/timezone`, then
+2. calling `dpkg-reconfigure tzdata`.
+
+Only the `tz` attribute is used; all others are ignored.
+
+### timezone-ii::fedora
+
+This changes the timezone on Fedora by calling `timedatectl set-timezone` with the value of `tz`.
+
+Only the `tz` attribute is used; all others are ignored.
+
+### timezone-ii::linux-generic
+
+This changes the time on all other OSs. It assumes that the kernel gets data on the local timezone
+from `/etc/localtime`. (This is true for FreeBSD as well as Linux, so "linux-generic" is a bit of a
+misnomer.)
+
+What this recipe does:
+
+1. verifies that the value of `tz` corresponds with a timezone data file under the directory specified in
+   `timezone.tzdata_dir` (default: `/usr/share/zoneinfo`), then
+2. creates a copy of or symbolic link to that data file in the path specified in `timezone.localtime_path`
+   (default: `/etc/localtime`).
+
+The truthiness of `timezone.use_symlink` (default: `false`) determines whether a symlink or a copy is made.
 
 Contributing
 ------------
