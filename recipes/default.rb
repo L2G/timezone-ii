@@ -16,7 +16,7 @@ package value_for_platform_family(
 )
 
 case node.platform_family
-when 'debian', 'fedora'
+when 'debian', 'fedora', 'pld'
   include_recipe "timezone-ii::#{node.platform_family}"
 
 else
