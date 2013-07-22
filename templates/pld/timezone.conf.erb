@@ -1,0 +1,10 @@
+# Time zone information.
+
+# Directory containing zone information files.
+ZONE_INFO_DIR="<%= node['timezone']['tzdata_dir'] %>"
+
+# Scheme you would like to use in your system.
+ZONE_INFO_SCHEME="posix"
+
+# Name of the time zone for your system.
+TIMEZONE="<%= node[:tz] %>"
