@@ -16,6 +16,7 @@ This cookbook is known to work with:
 * Debian
 * Fedora
 * Gentoo
+* PLD Linux
 * Ubuntu
 
 It _should_ work with any OS that uses the IANA/Olson timezone database and
@@ -101,9 +102,9 @@ Only the `tz` attribute is used; all others are ignored.
 
 ### timezone-ii::linux-generic
 
-This changes the time on all other OSs. It assumes that the kernel gets data on the local timezone
-from `/etc/localtime`. (This is true for FreeBSD as well as Linux, so "linux-generic" is a bit of a
-misnomer.)
+This changes the time on all OSs without a more specific recipe. It assumes that the kernel gets data
+on the local timezone from `/etc/localtime`. (This is true for FreeBSD as well as Linux, so "linux-generic"
+is a bit of a misnomer.)
 
 What this recipe does:
 
@@ -113,6 +114,11 @@ What this recipe does:
    (default: `/etc/localtime`).
 
 The truthiness of `timezone.use_symlink` (default: `false`) determines whether a symlink or a copy is made.
+
+### timezone-ii::pld
+
+This changes the timezone on PLD Linux. It writes the appropriate timezone configuration file, making
+use of the `tz` and `timezone.tz_datadir` attributes. Other attributes are ignored.
 
 Contributing
 ------------
@@ -126,9 +132,9 @@ Contributing
 License and Authors
 -------------------
 
-Copyright © 2010 James Harton <james@sociable.co.nz>
-
-Copyright © 2013 Lawrence Leonard Gilbert <larry@L2G.to>
+Copyright © 2010 James Harton <james@sociable.co.nz>             
+Copyright © 2013 Lawrence Leonard Gilbert <larry@L2G.to>         
+Copyright © 2013 Elan Ruusamäe <glen@delfi.ee> (for PLD support)
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 this file except in compliance with the License.  You may obtain a copy of the
