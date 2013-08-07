@@ -31,4 +31,9 @@ platform 'ubuntu' do
     end
 end
 
+platform 'pld' do
+    box 'pld32-latest'
+    box_url 'ftp://ftp.pld-linux.org/people/glen/vm/pld32.box'
+end
+
 # vim:ft=ruby:
