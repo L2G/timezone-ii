@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: timezone-ii
-# Recipe:: CentOS 6
+# Recipe:: CentOS 6/RHEL 6/<etc RHEL 6 based distribs>
 #
-# Copyright 2013, Lawrence Leonard Gilbert <larry@L2G.to>
+# Copyright 2013, fraD00r4 <frad00r4@gmail.com>
 #
 # Apache 2.0 License.
 #
