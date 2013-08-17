@@ -129,12 +129,21 @@ Contributing
    all pass
 5. Submit a pull request using GitHub
 
+Acknowledgements
+----------------
+
+Thanks to:
+
+* James Harton, for launching the timezone cookbook
+* Elan Ruusamäe, for PLD support
+* Mike Conigliaro, for bringing testing up to date
+
 License and Authors
 -------------------
 
 Copyright © 2010 James Harton <james@sociable.co.nz>             
 Copyright © 2013 Lawrence Leonard Gilbert <larry@L2G.to>         
-Copyright © 2013 Elan Ruusamäe <glen@delfi.ee> (for PLD support)
+Copyright © 2013 Elan Ruusamäe <glen@delfi.ee>
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 this file except in compliance with the License.  You may obtain a copy of the
