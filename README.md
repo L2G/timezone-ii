@@ -12,7 +12,7 @@ Requirements
 This cookbook is known to work with:
 
 * Amazon Linux
-* CentOS
+* CentOS and RHEL
 * Debian
 * Fedora
 * Gentoo
@@ -137,6 +137,8 @@ Thanks to:
 * James Harton, for launching the timezone cookbook
 * Elan Ruusamäe, for PLD support
 * Mike Conigliaro, for bringing testing up to date
+* "fraD00r4", for RHEL/CentOS support
+
 
 License and Authors
 -------------------
@@ -144,6 +146,7 @@ License and Authors
 Copyright © 2010 James Harton <james@sociable.co.nz>             
 Copyright © 2013 Lawrence Leonard Gilbert <larry@L2G.to>         
 Copyright © 2013 Elan Ruusamäe <glen@delfi.ee>
+Copyright © 2013 fraD00r4 <frad00r4@gmail.com>
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 this file except in compliance with the License.  You may obtain a copy of the
