@@ -1,6 +1,5 @@
-source "http://rubygems.org/"
+source 'https://rubygems.org'
 
-group :development, :test do
-    gem "chef"
-    gem "test-kitchen"
-end
+gem 'berkshelf'
+gem 'test-kitchen', :group => :integration
+gem 'kitchen-vagrant', :group => :integration
