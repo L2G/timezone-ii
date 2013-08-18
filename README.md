@@ -96,29 +96,33 @@ Only the `tz` attribute is used; all others are ignored.
 
 ### timezone-ii::fedora
 
-This changes the timezone on Fedora by calling `timedatectl set-timezone` with the value of `tz`.
+This changes the timezone on Fedora by calling `timedatectl set-timezone` with
+the value of `tz`.
 
 Only the `tz` attribute is used; all others are ignored.
 
 ### timezone-ii::linux-generic
 
-This changes the time on all OSs without a more specific recipe. It assumes that the kernel gets data
-on the local timezone from `/etc/localtime`. (This is true for FreeBSD as well as Linux, so "linux-generic"
-is a bit of a misnomer.)
+This changes the time on all OSs without a more specific recipe. It assumes that
+the kernel gets data on the local timezone from `/etc/localtime`. (This is true
+for FreeBSD as well as Linux, so "linux-generic" is a bit of a misnomer.)
 
 What this recipe does:
 
-1. verifies that the value of `tz` corresponds with a timezone data file under the directory specified in
-   `timezone.tzdata_dir` (default: `/usr/share/zoneinfo`), then
-2. creates a copy of or symbolic link to that data file in the path specified in `timezone.localtime_path`
-   (default: `/etc/localtime`).
+1. verifies that the value of `tz` corresponds with a timezone data file under
+   the directory specified in `timezone.tzdata_dir` (default:
+   `/usr/share/zoneinfo`), then
+2. creates a copy of or symbolic link to that data file in the path specified in
+   `timezone.localtime_path` (default: `/etc/localtime`).
 
-The truthiness of `timezone.use_symlink` (default: `false`) determines whether a symlink or a copy is made.
+The truthiness of `timezone.use_symlink` (default: `false`) determines whether a
+symlink or a copy is made.
 
 ### timezone-ii::pld
 
-This changes the timezone on PLD Linux. It writes the appropriate timezone configuration file, making
-use of the `tz` and `timezone.tz_datadir` attributes. Other attributes are ignored.
+This changes the timezone on PLD Linux. It writes the appropriate timezone
+configuration file, making use of the `tz` and `timezone.tz_datadir` attributes.
+Other attributes are ignored.
 
 ### timezone-ii::rhel
 
