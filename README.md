@@ -120,6 +120,13 @@ The truthiness of `timezone.use_symlink` (default: `false`) determines whether a
 This changes the timezone on PLD Linux. It writes the appropriate timezone configuration file, making
 use of the `tz` and `timezone.tz_datadir` attributes. Other attributes are ignored.
 
+### timezone-ii::rhel
+
+This changes the timezone on RedHat Enterprise Linux (RHEL) and CentOS.  It
+updates the `/etc/sysconfig/clock` file with the value of the `tz` attribute,
+then calls `tzdata-update` to change the timezone.  All node attributes other
+than `tz` are ignored.
+
 Contributing
 ------------
 1. Fork the [repository on GitHub](https://github.com/L2G/timezone-ii)
