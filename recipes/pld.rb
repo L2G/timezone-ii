@@ -17,7 +17,7 @@ template "/etc/sysconfig/timezone" do
   owner 'root'
   group 'root'
   mode 0644
-  notifies :reload, 'service[timezone]'
+  notifies :restart, 'service[timezone]', :immediately
 end
 
 service 'timezone' do
