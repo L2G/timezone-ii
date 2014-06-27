@@ -12,11 +12,12 @@
 # timekeeping field is forever in your debt.)
 package value_for_platform_family(
   'gentoo'  => 'timezone-data',
+  'solaris2' => 'timezone',
   'default' => 'tzdata'
 )
 
 case node.platform_family
-when 'debian', 'fedora', 'pld', 'rhel'
+when 'debian', 'fedora', 'pld', 'rhel', 'solaris2'
   include_recipe "timezone-ii::#{node.platform_family}"
 
 else
