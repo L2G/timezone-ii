@@ -62,6 +62,12 @@ Attributes
     of the appropriate timezone data file (linux-generic recipe only)</td>
     <td>false</td>
   </tr>
+  <tr>
+    <td><tt>['timezone']['mode']</tt></td>
+    <td>String</td>
+    <td>whether to upgrade (default) or only install timezone package</td>
+    <td>upgrade</td>
+  </tr>
 </table>
 
 Usage

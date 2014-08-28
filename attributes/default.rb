@@ -9,3 +9,6 @@ default.timezone.localtime_path = '/etc/localtime'
 # Whether to use a symlink to tzdata (instead of copying).
 # Used only in the linux-default recipe.
 default.timezone.use_symlink = false
+
+# whether to install or upgrade tzdata package
+default.timezone.mode = 'upgrade'
