@@ -8,6 +8,16 @@ platforms:
 - name: ubuntu-10.04
 - name: centos-6.4
 - name: centos-5.9
+- name: amazon-2014.09.1
+  driver:
+    name: ec2
+    region: us-east-1
+    image_id: ami-b66ed3de
+    flavor_id: m3.medium
+    ebs_volume_size: 8
+    ebs_delete_on_termination: true
+    ebs_device_name: /dev/sda
+    username: ec2-user
 
 suites:
 - name: default
