@@ -7,16 +7,17 @@
 # Apache 2.0 License.
 #
 
-template "/etc/sysconfig/clock" do
-  source "clock.erb"
+template '/etc/sysconfig/clock' do
+  source 'clock.erb'
   owner 'root'
   group 'root'
   mode 0644
-  notifies :run, 'bash[tzdata-update]'
+  notifies :run, 'execute[tzdata-update]'
 end
 
-bash 'tzdata-update' do
-  user 'root'
-  code "/usr/sbin/tzdata-update"
+execute 'tzdata-update' do
+  command '/usr/sbin/tzdata-update'
   action :nothing
+  # Amazon Linux doesn't have this command!
+  only_if { ::File.executable?('/usr/sbin/tzdata-update') }
 end
