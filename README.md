@@ -59,7 +59,8 @@ Attributes
     <td><tt>['timezone']['use_symlink']</tt></td>
     <td>Boolean</td>
     <td>whether to use a symlink into the tzdata tree rather than make a copy
-    of the appropriate timezone data file (linux-generic recipe only)</td>
+    of the appropriate timezone data file (amazon and linux-generic recipes
+    only)</td>
     <td>false</td>
   </tr>
 </table>
@@ -85,9 +86,18 @@ timezone database package for your OS (`timezone-data` on Gentoo, `tzdata` on
 all others). Then it will call one of the recipes below according to your
 node's platform.
 
+### timezone-ii::amazon
+
+This changes the timezone on Amazon Linux by:
+
+1. including the "timezone-ii::linux-generic" recipe, then
+2. including the "timezone-ii::rhel" recipe.
+
+Refer to the sections for those recipes for details.
+
 ### timezone-ii::debian
 
-This changes the timezone on Debian and Debian-derived systems by:
+This changes the timezone on Debian-family platforms by:
 
 1. writing the value of `tz` to `/etc/timezone`, then
 2. calling `dpkg-reconfigure tzdata`.
@@ -96,8 +106,8 @@ Only the `tz` attribute is used; all others are ignored.
 
 ### timezone-ii::fedora
 
-This changes the timezone on Fedora by calling `timedatectl set-timezone` with
-the value of `tz`.
+This changes the timezone on Fedora-family platforms by calling `timedatectl
+set-timezone` with the value of `tz`.
 
 Only the `tz` attribute is used; all others are ignored.
 
@@ -126,18 +136,17 @@ Other attributes are ignored.
 
 ### timezone-ii::rhel
 
-This changes the timezone on RedHat Enterprise Linux (RHEL) and CentOS.  It
-updates the `/etc/sysconfig/clock` file with the value of the `tz` attribute,
-then calls `tzdata-update` to change the timezone.  All node attributes other
-than `tz` are ignored.
+This changes the timezone on RedHat Enterprise Linux (RHEL) and RHEL-family
+platforms such as CentOS.  It updates the `/etc/sysconfig/clock` file with the
+value of the `tz` attribute, then calls `tzdata-update` (if available) to
+change the timezone.  All node attributes other than `tz` are ignored.
 
 Contributing
 ------------
 1. Fork the [repository on GitHub](https://github.com/L2G/timezone-ii)
 2. Create a named feature branch (like `add_component_x`)
 3. Write your change
-4. If at all possible, write test-kitchen tests for your change and ensure they
-   all pass
+4. If at all possible, write tests for your change and ensure they all pass
 5. Submit a pull request using GitHub
 
 Acknowledgements
@@ -155,7 +164,7 @@ License and Authors
 -------------------
 
 Copyright © 2010 James Harton <james@sociable.co.nz>             
-Copyright © 2013 Lawrence Leonard Gilbert <larry@L2G.to>         
+Copyright © 2013, 2014 Lawrence Leonard Gilbert <larry@L2G.to>         
 Copyright © 2013 Elan Ruusamäe <glen@delfi.ee>                   
 Copyright © 2013 fraD00r4 <frad00r4@gmail.com>                   
 
