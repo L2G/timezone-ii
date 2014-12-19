@@ -6,9 +6,10 @@ This file is used to list changes made in each version of timezone-ii.
 
 * Added experimental support for PLD (https://www.pld-linux.org; thanks to Elan
   Ruusamäe)
-* Added support for RHEL/CentOS (thanks to "fraD00r4")
+* Added support for RHEL family (thanks to "fraD00r4")
 * Complete refresh of test-kitchen setup, including use of Berkshelf (thanks to
   Mike Conigliaro)
+* Added support for Amazon Linux as a special RHEL case
 
 ## 0.2.0:
 
