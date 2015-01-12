@@ -11,6 +11,9 @@ platforms:
 - name: amazon-2014.09.1
   driver:
     name: ec2
+    aws_access_key_id: <%= ENV['AWS_ACCESS_KEY'] || 'AWS_ACCESS_KEY' %>
+    aws_secret_access_key: <%= ENV['AWS_SECRET_KEY'] || 'AWS_SECRET_KEY' %>
+    aws_ssh_key_id: <%= ENV['AWS_SSH_KEY_ID'] || 'AWS_SSH_KEY_ID' %>
     region: us-east-1
     image_id: ami-b66ed3de
     flavor_id: m3.medium
