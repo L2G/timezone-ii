@@ -164,7 +164,7 @@ License and Authors
 -------------------
 
 Copyright © 2010 James Harton <james@sociable.co.nz>             
-Copyright © 2013, 2014 Lawrence Leonard Gilbert <larry@L2G.to>         
+Copyright © 2013-2015 Lawrence Leonard Gilbert <larry@L2G.to>         
 Copyright © 2013 Elan Ruusamäe <glen@delfi.ee>                   
 Copyright © 2013 fraD00r4 <frad00r4@gmail.com>                   
 
