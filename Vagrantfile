@@ -9,7 +9,15 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "timezone-ii-berkshelf"
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = 'opscode-ubuntu-14.04'
+  config.vm.box = 'ruby-concurrency/oracle-solaris-11'
+
+  # config.ssh.insert_key = false is necessary on some legacy Vagrant boxes
+  # where the SSH key cannot be changed out.  Do not set this unless Vagrant
+  # says it's required.
+  #
+  # This is known to be required for:
+  #   Solaris (see https://github.com/mitchellh/vagrant/issues/4969)
+  config.ssh.insert_key = false
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
