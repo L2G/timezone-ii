@@ -39,7 +39,7 @@ Attributes
     <td><tt>['tz']</tt></td>
     <td>String</td>
     <td>the timezone name as defined in tzdata</td>
-    <td>UTC</td>
+    <td>"Etc/UTC" on Debian platforms; "UTC" for all other platforms</td>
   </tr>
   <tr>
     <td><tt>['timezone']['tzdata_dir']</tt></td>
