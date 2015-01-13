@@ -16,12 +16,11 @@ template "/etc/timezone" do
   owner 'root'
   group 'root'
   mode 0644
-  notifies :run, 'bash[dpkg-reconfigure tzdata]'
+  notifies :run, 'execute[dpkg-reconfigure-tzdata]'
 end
 
-bash 'dpkg-reconfigure tzdata' do
-  user 'root'
-  code "/usr/sbin/dpkg-reconfigure -f noninteractive tzdata"
+execute 'dpkg-reconfigure-tzdata' do
+  command '/usr/sbin/dpkg-reconfigure -f noninteractive tzdata'
   action :nothing
 end
 
