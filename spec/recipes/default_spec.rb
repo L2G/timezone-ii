@@ -137,7 +137,20 @@ describe 'timezone-ii::default' do
   end
 
   context 'on Solaris2' do
-    it_should_behave_like 'an unsupported OS', 'solaris2', '5.11'
+    let(:chef_run) do
+      allow(::File).to receive(:symlink?).with('/etc/localtime')
+        .and_return(false)
+      stub_command('svccfg -s timezone:default listprop timezone/localtime | grep UTC')
+        .and_return('stubbed value')
+      ChefSpec::SoloRunner.new(platform: 'solaris2', version: '5.11')
+        .converge(described_recipe)
+    end
+
+    specify { expect(chef_run).to install_package('timezone') }
+    specify { expect(chef_run).to include_recipe('timezone-ii::solaris2') }
+    specify do
+      expect(chef_run).not_to include_recipe('timezone-ii::linux-generic')
+    end
   end
 
   context 'on SUSE' do
