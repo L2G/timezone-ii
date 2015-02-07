@@ -17,12 +17,14 @@ package value_for_platform_family(
 
 case node.platform_family
 when 'rhel'
+  include_recipe 'timezone-ii::linux-generic'
   include_recipe value_for_platform(
     'amazon' => { 'default' => 'timezone-ii::amazon' },
     'default' => 'timezone-ii::rhel'
   )
 
 when 'debian', 'fedora', 'pld'
+  include_recipe 'timezone-ii::linux-generic'
   include_recipe "timezone-ii::#{node.platform_family}"
 
 else
