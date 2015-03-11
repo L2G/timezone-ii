@@ -26,5 +26,6 @@ platforms:
 
 suites:
 - name: default
-  run_list: ["recipe[minitest-handler]", "recipe[timezone-ii]"]
-  attributes: {}
+  run_list: ["recipe[timezone-ii]"]
+  attributes:
+    tz: "Pacific/Tongatapu" # "TOT"
