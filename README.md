@@ -39,7 +39,7 @@ Attributes
     <td><tt>['tz']</tt></td>
     <td>String</td>
     <td>the timezone name as defined in tzdata</td>
-    <td>UTC</td>
+    <td>"Etc/UTC" on Debian platforms; "UTC" for all other platforms</td>
   </tr>
   <tr>
     <td><tt>['timezone']['tzdata_dir']</tt></td>
@@ -100,7 +100,9 @@ Refer to the sections for those recipes for details.
 This changes the timezone on Debian-family platforms by:
 
 1. writing the value of `tz` to `/etc/timezone`, then
-2. calling `dpkg-reconfigure tzdata`.
+2. calling `dpkg-reconfigure -f noninteractive tzdata`;
+3. if `dpkg-reconfigure` amends the timezone value (e.g. by changing "UTC" to
+   "Etc/UTC" or "EET" to "Europe/Helsinki"), it logs a warning.
 
 Only the `tz` attribute is used; all others are ignored.
 

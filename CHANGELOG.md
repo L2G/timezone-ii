@@ -10,6 +10,10 @@ This file is used to list changes made in each version of timezone-ii.
 * Complete refresh of test-kitchen setup, including use of Berkshelf (thanks to
   Mike Conigliaro)
 * Added support for Amazon Linux as a special RHEL case
+* Debian recipe now logs a warning if dpkg-reconfigure is rewriting the value
+  in /etc/timezone (for example, changing "UTC" to "Etc/UTC")
+* Because of the aforementioned behavior of dpkg-reconfigure, the default
+  timezone for Debian-based platforms is now "Etc/UTC"
 
 ## 0.2.0:
 

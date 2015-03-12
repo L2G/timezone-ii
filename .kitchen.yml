@@ -7,6 +7,7 @@ platforms:
 - name: ubuntu-14.04
 - name: ubuntu-12.04
 - name: ubuntu-10.04
+- name: debian-7.8
 - name: centos-7.0
 - name: centos-6.6
 - name: centos-5.9

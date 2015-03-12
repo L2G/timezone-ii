@@ -1,4 +1,8 @@
-default.tz = 'UTC'
+# Use universal time if no other timezone is specified
+default.tz = value_for_platform_family(
+  'debian'  => 'Etc/UTC',
+  'default' => 'UTC'
+)
 
 # Path to tzdata directory
 default.timezone.tzdata_dir = '/usr/share/zoneinfo'
