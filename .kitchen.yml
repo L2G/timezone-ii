@@ -10,6 +10,7 @@ platforms:
 - name: centos-7.0
 - name: centos-6.6
 - name: centos-5.9
+- name: fedora-21
 - name: amazon-2014.09.1
   driver:
     name: ec2

@@ -41,16 +41,29 @@ describe 'timezone-ii::default' do
     specify { expect(chef_run).to include_recipe('timezone-ii::rhel') }
   end
 
-  context 'on CentOS' do
+  context 'on CentOS 6.5' do
     let(:chef_run) do
       allow(::File).to receive(:symlink?).with('/etc/localtime')
         .and_return(false)
-      ChefSpec::SoloRunner.new(platform: 'centos', version: '7.0')
+      ChefSpec::SoloRunner.new(platform: 'centos', version: '6.5')
         .converge(described_recipe)
     end
 
     specify { expect(chef_run).to install_package('tzdata') }
     specify { expect(chef_run).to include_recipe('timezone-ii::rhel') }
+    specify do
+      expect(chef_run).not_to include_recipe('timezone-ii::linux-generic')
+    end
+  end
+
+  context 'on CentOS 7.0' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new(platform: 'centos', version: '7.0')
+        .converge(described_recipe)
+    end
+
+    specify { expect(chef_run).to install_package('tzdata') }
+    specify { expect(chef_run).to include_recipe('timezone-ii::rhel7') }
     specify do
       expect(chef_run).not_to include_recipe('timezone-ii::linux-generic')
     end
