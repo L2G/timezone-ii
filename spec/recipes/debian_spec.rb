@@ -12,4 +12,16 @@ describe 'timezone-ii::debian' do
       expect(template).to notify('execute[dpkg-reconfigure-tzdata]').to(:run).delayed
     end
   end
+
+  context 'execute[dpkg-reconfigure-tzdata]' do
+    let(:execute) { chef_run.execute('dpkg-reconfigure-tzdata') }
+
+    it 'should do nothing by default' do
+      expect(execute).to do_nothing
+    end
+  end
+
+  context 'log[if-unexpected-timezone-change]' do
+    it 'is in need of tests'
+  end
 end
