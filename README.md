@@ -106,10 +106,8 @@ Only the `tz` attribute is used; all others are ignored.
 
 ### timezone-ii::fedora
 
-This changes the timezone on Fedora-family platforms by calling `timedatectl
-set-timezone` with the value of `tz`.
-
-Only the `tz` attribute is used; all others are ignored.
+Because Fedora sets its timezone the same way RHEL 7 does, this simply
+includes the "timezone-ii::rhel7" recipe.
 
 ### timezone-ii::linux-generic
 
@@ -137,9 +135,20 @@ Other attributes are ignored.
 ### timezone-ii::rhel
 
 This changes the timezone on RedHat Enterprise Linux (RHEL) and RHEL-family
-platforms such as CentOS.  It updates the `/etc/sysconfig/clock` file with the
-value of the `tz` attribute, then calls `tzdata-update` (if available) to
-change the timezone.  All node attributes other than `tz` are ignored.
+platforms such as CentOS.  It is intended only for versions prior to 7.0, but
+should the recipe be called on a system with version 7.0 or newer, it will
+automatically include the "timezone-ii::rhel7" recipe and do nothing else.
+
+This recipe updates the `/etc/sysconfig/clock` file with the value of the `tz`
+attribute, then calls `tzdata-update` (if available) to change the timezone.
+All node attributes other than `tz` are ignored.
+
+### timezone-ii::rhel7
+
+This changes the timezone on EL 7 platforms by calling `timedatectl
+set-timezone` with the value of `tz`.
+
+Only the `tz` attribute is used; all others are ignored.
 
 Contributing
 ------------
