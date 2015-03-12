@@ -1,0 +1,11 @@
+# Text formatting specifications (see http://editorconfig.org/)
+
+# Stop looking for .editorconfig in any parent directories
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 2

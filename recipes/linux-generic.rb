@@ -42,5 +42,3 @@ else
     }
   end
 end  # if/else node.timezone.use_symlink
-
-# vim:ts=2:sw=2:

@@ -49,5 +49,3 @@ else
   end  # if/else node.os
 
 end  # case node.platform_family
-
-# vim:ts=2:sw=2:

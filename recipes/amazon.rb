@@ -16,5 +16,3 @@
 
 include_recipe 'timezone-ii::linux-generic'
 include_recipe 'timezone-ii::rhel'
-
-# vim:ts=2:sw=2:

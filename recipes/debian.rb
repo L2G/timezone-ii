@@ -36,5 +36,3 @@ log 'if-unexpected-timezone-change' do
   action :nothing
   subscribes :write, 'execute[dpkg-reconfigure-tzdata]', :immediately
 end
-
-# vim:ts=2:sw=2:

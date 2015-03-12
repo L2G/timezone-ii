@@ -23,5 +23,3 @@ end
 service 'timezone' do
   action :nothing
 end
-
-# vim:ts=2:sw=2:et
