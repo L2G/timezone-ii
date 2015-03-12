@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-source "${BATS_TEST_DIRNAME}/helper.bash"
+load helper
 
 @test "/etc/timezone content correct" {
   if [ "debian" != "$ohai_platform_family" ]; then

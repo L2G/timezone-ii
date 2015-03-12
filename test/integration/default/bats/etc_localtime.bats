@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-source "${BATS_TEST_DIRNAME}/helper.bash"
+load helper
 
 symlink_ok_on_this_platform () {
   [ "centos" == "$ohai_platform" ] || \
