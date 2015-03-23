@@ -10,10 +10,13 @@
 
 # Make sure the tzdata database is installed. (Arthur David Olson, the computer
 # timekeeping field is forever in your debt.)
-package value_for_platform_family(
-  'gentoo'  => 'timezone-data',
-  'default' => 'tzdata'
-)
+package 'tzdata' do
+  package_name value_for_platform_family(
+    'gentoo'  => 'timezone-data',
+    'default' => 'tzdata'
+  )
+  action node.timezone.mode
+end
 
 case node.platform_family
 when 'rhel'
