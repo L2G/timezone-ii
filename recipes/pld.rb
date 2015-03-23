@@ -12,12 +12,12 @@
 # Set timezone for PLD family:  Put the timezone string in plain text in
 # /etc/sysconfig/timezone and then re-run the timezone service to pick it up.
 
-template "/etc/sysconfig/timezone" do
-  source "timezone.conf.erb"
+template '/etc/sysconfig/timezone' do
+  source 'timezone.conf.erb'
   owner 'root'
   group 'root'
   mode 0644
-  notifies :reload, 'service[timezone]'
+  notifies :restart, 'service[timezone]', :immediately
 end
 
 service 'timezone' do
