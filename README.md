@@ -1,6 +1,8 @@
 Timezone II
 ===========
 
+[![Join the chat at https://gitter.im/L2G/timezone-ii](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/L2G/timezone-ii?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 The Timezone II cookbook contains recipes for installing the latest tzdata
 (a.k.a. IANA or Olson) timezone database and setting the timezone on your
 system.  It is a fork of the [timezone cookbook by James
