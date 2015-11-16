@@ -23,6 +23,16 @@ end
 
 execute 'dpkg-reconfigure-tzdata' do
   command '/usr/sbin/dpkg-reconfigure -f noninteractive tzdata'
+  notifies :restart, 'service[cron]', :immediately
+  notifies :restart, 'service[rsyslog]', :immediately
+  action :nothing
+end
+
+service 'cron' do
+  action :nothing
+end
+
+service 'rsyslog' do
   action :nothing
 end
 

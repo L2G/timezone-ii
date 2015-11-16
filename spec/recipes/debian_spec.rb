@@ -19,6 +19,11 @@ describe 'timezone-ii::debian' do
     it 'should do nothing by default' do
       expect(execute).to do_nothing
     end
+
+    it 'should notify daemons to restart' do
+      expect(execute).to notify('service[cron]').to(:restart).immediately
+      expect(execute).to notify('service[rsyslog]').to(:restart).immediately
+    end
   end
 
   context 'log[if-unexpected-timezone-change]' do
