@@ -15,10 +15,9 @@ localtime_path = node.timezone.localtime_path
 
 ruby_block "confirm timezone" do
   block {
-    unless File.exist?(timezone_data_file)
-      raise "Can't find #{timezone_data_file}!"
-    end
+    raise "Can't find #{timezone_data_file}!"
   }
+  not_if { File.exist?(timezone_data_file) }
 end
 
 if node.timezone.use_symlink
