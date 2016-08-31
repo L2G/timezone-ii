@@ -8,4 +8,4 @@
 #
 
 # This sets the timezone on EL 7 distributions (e.g. RedHat and CentOS)
-execute "timedatectl --no-ask-password set-timezone #{node[:tz]}"
+execute "timedatectl --no-ask-password set-timezone #{node['tz']}"
