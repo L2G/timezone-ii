@@ -12,18 +12,20 @@
 # /etc/timezone and then re-run the tzdata configuration to pick it up.
 
 TIMEZONE_FILE = '/etc/timezone'
-
 template TIMEZONE_FILE do
   source "timezone.conf.erb"
   owner 'root'
   group 'root'
   mode 0644
-  notifies :run, 'execute[dpkg-reconfigure-tzdata]'
 end
 
-execute 'dpkg-reconfigure-tzdata' do
-  command '/usr/sbin/dpkg-reconfigure -f noninteractive tzdata'
-  action :nothing
+ubuntu = "#{node['platform']}-#{node['platform_version']}"
+if ubuntu == 'ubuntu-16.04'
+  execute "timedatectl set-timezone #{node['tz']}"
+else
+  execute 'dpkg-reconfigure-tzdata' do
+    command '/usr/sbin/dpkg-reconfigure -f noninteractive tzdata'
+  end
 end
 
 # Certain values get normalized by dpkg-reconfigure, causing this recipe to try
