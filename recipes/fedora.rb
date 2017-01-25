@@ -8,4 +8,4 @@
 #
 
 # Fedora and EL 7 currently use the same timedatectl utility
-include_recipe 'timezone-ii::rhel7'
+include_recipe 'timezone-ii::systemd'

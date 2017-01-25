@@ -29,7 +29,7 @@ describe 'timezone-ii::rhel' do
     end
 
     specify { expect(chef_run).to create_template('/etc/sysconfig/clock') }
-    specify { expect(chef_run).not_to include_recipe('timezone-ii::rhel7') }
+    specify { expect(chef_run).not_to include_recipe('timezone-ii::systemd') }
 
     context 'template[/etc/sysconfig/clock]' do
       let(:template) { chef_run.template('/etc/sysconfig/clock') }
@@ -50,7 +50,7 @@ describe 'timezone-ii::rhel' do
     end
 
     specify { expect(chef_run).not_to create_template('/etc/sysconfig/clock') }
-    specify { expect(chef_run).to include_recipe('timezone-ii::rhel7') }
+    specify { expect(chef_run).to include_recipe('timezone-ii::systemd') }
   end
 
   context 'on Amazon Linux' do

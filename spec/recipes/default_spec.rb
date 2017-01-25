@@ -63,7 +63,7 @@ describe 'timezone-ii::default' do
     end
 
     specify { expect(chef_run).to install_package('tzdata') }
-    specify { expect(chef_run).to include_recipe('timezone-ii::rhel7') }
+    specify { expect(chef_run).to include_recipe('timezone-ii::systemd') }
     specify do
       expect(chef_run).not_to include_recipe('timezone-ii::linux-generic')
     end
