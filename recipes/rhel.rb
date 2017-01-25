@@ -17,8 +17,7 @@
 el_version = node[:platform_version].split('.')[0].to_i
 
 if el_version >= 7
-  include_recipe 'timezone-ii::rhel7'
-
+  include_recipe 'timezone-ii::systemd'
 else
   template '/etc/sysconfig/clock' do
     source 'clock.erb'

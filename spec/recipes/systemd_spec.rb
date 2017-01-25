@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'timezone-ii::rhel7' do
+describe 'timezone-ii::systemd' do
   let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
 
   specify { expect(chef_run).not_to create_template('/etc/sysconfig/clock') }
