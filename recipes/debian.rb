@@ -13,6 +13,10 @@
 
 TIMEZONE_FILE = '/etc/timezone'
 
+file '/etc/localtime' do
+      action :delete
+end
+
 template TIMEZONE_FILE do
   source "timezone.conf.erb"
   owner 'root'
