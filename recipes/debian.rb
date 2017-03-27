@@ -11,14 +11,13 @@
 # Set timezone for Debian family:  Put the timezone string in plain text in
 # /etc/timezone and then re-run the tzdata configuration to pick it up.
 
+TIMEZONE_FILE = '/etc/timezone'
 if node['platform_version'] == '16.04' 
     # Use timedatectl in this version to prevent bug https://bugs.launchpad.net/ubuntu/+source/tzdata/+bug/1554806
     execute 'timedatectl-set-timezone' do
       command "/usr/bin/timedatectl set-timezone #{node[:tz]}"
     end
 else
-    TIMEZONE_FILE = '/etc/timezone'
-
     template TIMEZONE_FILE do
       source "timezone.conf.erb"
       owner 'root'
