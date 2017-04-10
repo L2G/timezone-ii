@@ -10,8 +10,8 @@
 # Generic timezone-changing method for Linux that should work for any distro
 # without a platform-specific method.
 
-timezone_data_file = File.join(node.timezone.tzdata_dir, node.tz)
-localtime_path = node.timezone.localtime_path
+timezone_data_file = File.join(node['timezone']['tzdata_dir'], node['tz'])
+localtime_path = node['timezone']['localtime_path']
 
 ruby_block "confirm timezone" do
   block {
@@ -21,7 +21,7 @@ ruby_block "confirm timezone" do
   }
 end
 
-if node.timezone.use_symlink
+if node['timezone']['use_symlink']
   link localtime_path do
     to timezone_data_file
     owner 'root'

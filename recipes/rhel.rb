@@ -14,7 +14,7 @@
 # If it is being run on EL 7 or newer, the recipe will be skipped and
 # the "rhel7" recipe will be included instead.
 
-el_version = node[:platform_version].split('.')[0].to_i
+el_version = node['platform_version'].split('.')[0].to_i
 
 if el_version >= 7
   include_recipe 'timezone-ii::rhel7'

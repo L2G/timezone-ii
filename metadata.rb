@@ -1,19 +1,19 @@
-name             "timezone-ii"
-maintainer       "Lawrence Leonard Gilbert"
-maintainer_email "larry@L2G.to"
-license          "Apache 2.0"
-description      "Configure the system timezone on *ix systems"
-version          "0.2.9992"
+name 'timezone-ii'
+maintainer 'Lawrence Leonard Gilbert'
+maintainer_email 'larry@L2G.to'
+license 'Apache 2.0'
+description' Configure the system timezone on *ix systems'
+version '0.2.9992'
 
-replaces         "timezone"
+replaces 'timezone'
 
-# These are platform versions where this cookbook has been tested at some point
-# in time
-supports "amazon"
-supports "centos"
-supports "debian"
-supports "fedora"
-supports "gentoo"
-supports "ubuntu"
-supports "pld"
-supports "redhat"
+# These are platform versions where this cookbook has been tested at some point in time
+
+%w(amazon centos debian fedora gentoo ubuntu pld redhat).each do |os|
+  supports os
+end
+
+source_url 'https://github.com/L2G/timezone-ii' if defined?(:source_url)
+issues_url 'https://github.com/L2G/timezone-ii/issues' if defined?(:issues_url)
+
+chef_version '>= 12'
