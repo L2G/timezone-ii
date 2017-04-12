@@ -16,7 +16,7 @@ package value_for_platform_family(
 )
 
 case node['platform_family']
-when 'rhel'
+when 'rhel', 'amazon'
   include_recipe value_for_platform(
     'amazon' => { 'default' => 'timezone-ii::amazon' },
     'default' => 'timezone-ii::rhel'
