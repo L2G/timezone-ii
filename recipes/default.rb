@@ -16,13 +16,14 @@ package value_for_platform_family(
 )
 
 case node['platform_family']
-when 'rhel', 'amazon'
-  include_recipe value_for_platform(
-    'amazon' => { 'default' => 'timezone-ii::amazon' },
-    'default' => 'timezone-ii::rhel'
-  )
+when 'rhel', 'fedora'
+  if node['platform_version'].split('.')[0].to_i >= 7
+    include_recipe 'timezone-ii::rhel7'
+  else
+    include_recipe 'timezone-ii::rhel'
+  end
 
-when 'debian', 'fedora', 'pld'
+when 'debian', 'pld', 'amazon'
   include_recipe "timezone-ii::#{node['platform_family']}"
 
 else
@@ -34,7 +35,7 @@ else
               "using generic Linux method"
     log message do
       level :warn
-      not_if { %w(centos gentoo rhel).include? node['platform_family'] }
+      not_if { %w(centos gentoo rhel amazon).include? node['platform_family'] }
     end
 
     include_recipe 'timezone-ii::linux-generic'
@@ -45,7 +46,5 @@ else
     log message do
       level :error
     end
-
-  end  # if/else node.os
-
-end  # case node.platform_family
+  end
+end

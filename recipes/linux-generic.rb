@@ -41,4 +41,4 @@ else
                         " or set attribute ['timezone']['use_symlink']=true"
     }
   end
-end  # if/else node.timezone.use_symlink
+end
